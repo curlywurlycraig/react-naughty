@@ -1,13 +1,13 @@
 import React from "react";
-import _When from "./when";
-import _Use from "./use";
+import When from "./when";
+import Use from "./use";
 
-const _UseWhen = ({ pred, hook, hookArgs, ...props }) => {
+const UseWhen = ({ pred, hook, hookArgs, ...props }) => {
   return (
-    <_When pred={pred}>
-      <_Use hook={hook} hookArgs={hookArgs} {...props} />
-    </_When>
+    <When pred={pred}>
+      <Use hook={hook} hookArgs={hookArgs} {...props} />
+    </When>
   );
 };
 
-export default _UseWhen;
+export default UseWhen;

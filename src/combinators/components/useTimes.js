@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import _Times from "./times";
-import _Use from "./use";
+import Times from "./times";
+import Use from "./use";
 
-const _UseTimes = ({ hook, hookArgs, n, children, onResultsChange }) => {
+const UseTimes = ({ hook, hookArgs, n, children, onResultsChange }) => {
   const resultsRef = useRef([]);
   const [newestResults, setNewestResults] = useState(resultsRef.current);
 
@@ -18,12 +18,12 @@ const _UseTimes = ({ hook, hookArgs, n, children, onResultsChange }) => {
 
   return (
     <>
-      <_Times n={n}>
-          <_Use hook={hook} hookArgs={hookArgs} onResult={updateHookResults} />
-      </_Times>
+      <Times n={n}>
+          <Use hook={hook} hookArgs={hookArgs} onResult={updateHookResults} />
+      </Times>
       { children ? children(newestResults, areAllDone) : null }
     </>
   );
 };
 
-export default _UseTimes;
+export default UseTimes;

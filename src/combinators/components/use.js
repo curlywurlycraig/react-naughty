@@ -11,7 +11,7 @@ const HookWrapper = ({ hook, hookArgs, onResult }) => {
   return null;
 };
 
-const _Use = ({ hook, hookArgs, children, onResult }) => {
+const Use = ({ hook, hookArgs, children, onResult }) => {
   const [results, setResults] = useState(null);
 
   const updateHookResults = (newResults) => {
@@ -33,4 +33,4 @@ const _Use = ({ hook, hookArgs, children, onResult }) => {
   );
 };
 
-export default _Use;
+export default Use;

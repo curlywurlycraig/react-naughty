@@ -1,6 +1,6 @@
 import React from "react";
 
-const _When = ({ pred, children }) => {
+const When = ({ pred, children }) => {
     if (pred()) {
         return children;
     }
@@ -8,4 +8,4 @@ const _When = ({ pred, children }) => {
     return null;
 };
 
-export default _When;
+export default When;

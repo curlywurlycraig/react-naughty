@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import _Times from "./combinators/components/times";
-import _UseTimes from "./combinators/components/useTimes";
-import _Use from "./combinators/components/use";
+import Times from "./combinators/components/times";
+import UseTimes from "./combinators/components/useTimes";
+import Use from "./combinators/components/use";
 import "./App.css";
-import _When from "./combinators/components/when";
-import _UseWhen from "./combinators/components/useWhen";
+import When from "./combinators/components/when";
+import UseWhen from "./combinators/components/useWhen";
 
 const useExampleHook = () => {
   return 1;
@@ -23,40 +23,40 @@ function App() {
 
   return (
     <>
-      <_Times n={5}>
+      <Times n={5}>
         <p>hello</p>
-      </_Times>
-      <_UseTimes hook={useExampleHook} n={5}>
+      </Times>
+      <UseTimes hook={useExampleHook} n={5}>
         {(results) => <p>it is: {results}</p>}
-      </_UseTimes>
+      </UseTimes>
 
-      <_Times n={5}>
-        <_Use hook={useExampleHook}>{(v) => v}</_Use>
-      </_Times>
+      <Times n={5}>
+        <Use hook={useExampleHook}>{(v) => v}</Use>
+      </Times>
 
-      <_Use hook={useExampleHook}>{(v) => v}</_Use>
+      <Use hook={useExampleHook}>{(v) => v}</Use>
 
-      <_UseTimes
+      <UseTimes
         hook={useExampleHook}
         n={10}
         onResultsChange={setHookResults}
       />
 
-      <_When pred={() => 1 === 1}>
+      <When pred={() => 1 === 1}>
         <p>should render</p>
-      </_When>
+      </When>
 
-      <_When pred={() => 1 === 2}>
+      <When pred={() => 1 === 2}>
         <p>should not render</p>
-      </_When>
+      </When>
 
-      <_UseWhen
+      <UseWhen
         pred={() => 1 === 2}
         hook={useLogEffect}
         hookArgs="should not log"
       />
 
-      <_UseWhen
+      <UseWhen
         pred={() => 1 === 1}
         hook={useLogEffect}
         hookArgs="should log"

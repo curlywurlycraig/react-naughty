@@ -1,9 +1,9 @@
 import React from "react";
 
-const _Times = ({ n, children }) => {
+const Times = ({ n, children }) => {
   return new Array(n)
     .fill(null)
     .map((_, idx) => <React.Fragment key={idx}>{children}</React.Fragment>);
 };
 
-export default _Times;
+export default Times;
