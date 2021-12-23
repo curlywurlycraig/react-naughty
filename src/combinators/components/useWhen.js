@@ -2,9 +2,9 @@ import React from "react";
 import When from "./when";
 import Use from "./use";
 
-const UseWhen = ({ pred, hook, hookArgs, ...props }) => {
+const UseWhen = ({ cond, hook, hookArgs, ...props }) => {
   return (
-    <When pred={pred}>
+    <When cond={cond}>
       <Use hook={hook} hookArgs={hookArgs} {...props} />
     </When>
   );

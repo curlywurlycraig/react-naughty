@@ -1,7 +1,7 @@
 import React from "react";
 
-const When = ({ pred, children }) => {
-    if (pred()) {
+const When = ({ cond, children }) => {
+    if (cond()) {
         return children;
     }
 

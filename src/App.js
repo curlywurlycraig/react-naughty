@@ -5,6 +5,7 @@ import Use from "./combinators/components/use";
 import "./App.css";
 import When from "./combinators/components/when";
 import UseWhen from "./combinators/components/useWhen";
+import Upon from "./combinators/components/upon";
 
 const useExampleHook = () => {
   return 1;
@@ -36,31 +37,31 @@ function App() {
 
       <Use hook={useExampleHook}>{(v) => v}</Use>
 
-      <UseTimes
-        hook={useExampleHook}
-        n={10}
-        onResultsChange={setHookResults}
-      />
+      {/* The onResultsChange callback can be used to interact outside of JSX */}
+      <UseTimes hook={useExampleHook} n={10} onResultsChange={setHookResults} />
 
-      <When pred={() => 1 === 1}>
+      {/* When allows JSX to be conditionally rendered without escaping from JSX */}
+      <When cond={() => 1 === 1}>
         <p>should render</p>
       </When>
 
-      <When pred={() => 1 === 2}>
+      <When cond={() => 1 === 2}>
         <p>should not render</p>
       </When>
 
+      {/* UseWhen simply composes Use and When */}
       <UseWhen
-        pred={() => 1 === 2}
+        cond={() => 1 === 2}
         hook={useLogEffect}
         hookArgs="should not log"
       />
 
-      <UseWhen
-        pred={() => 1 === 1}
-        hook={useLogEffect}
-        hookArgs="should log"
-      />
+      <UseWhen cond={() => 1 === 1} hook={useLogEffect} hookArgs="should log" />
+
+      {/* Upon allows some JSX to be rendered only when a callback is called. And only for one render cycle! */}
+      <Upon then={<Use hook={useLogEffect} hookArgs="button clicked!" />}>
+        {(cb) => <button onClick={cb}>click me and view logs</button>}
+      </Upon>
     </>
   );
 }
