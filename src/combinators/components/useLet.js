@@ -11,7 +11,6 @@ const UseLet = ({ map, children, onResultsChange }) => {
       [key]: newResult
     };
 
-    console.log('got result ', newResult);
     setNewestResults(resultsRef.current);
 
     if (onResultsChange) {
