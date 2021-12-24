@@ -6,7 +6,7 @@ const HookWrapper = ({ hook, hookArgs, onResult }) => {
 
   useEffect(() => {
     onResult(newHookResults);
-  }, [newHookResults]);
+  }, [JSON.stringify(newHookResults)]);
 
   return null;
 };
