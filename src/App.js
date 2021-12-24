@@ -6,8 +6,8 @@ import When from "./combinators/components/when";
 import UseWhen from "./combinators/components/useWhen";
 import Upon from "./combinators/components/upon";
 import UseLet from "./combinators/components/useLet";
-import "./App.css";
 import UseAll from "./combinators/components/useAll";
+import "./App.css";
 
 const useExampleHook = (val) => {
   return val || 1;
