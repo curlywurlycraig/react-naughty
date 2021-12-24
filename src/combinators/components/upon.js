@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import When from "./when";
 
-const Upon = ({ then, children }) => {
+const Upon = ({ then, children, singleFire }) => {
   const [willDo, setWillDo] = useState(false);
 
   const cb = () => {
@@ -9,7 +9,7 @@ const Upon = ({ then, children }) => {
   };
 
   useEffect(() => {
-    if (willDo) {
+    if (willDo && singleFire) {
       setWillDo(false);
     }
   }, [willDo]);

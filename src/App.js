@@ -31,39 +31,30 @@ const App = () => {
       <UseTimes hook={useExampleHook} n={5}>
         {(results) => <p>it is: {results}</p>}
       </UseTimes>
-
       <Times n={5}>
         <Use hook={useExampleHook}>{(v) => v}</Use>
       </Times>
-
       <Use hook={useExampleHook}>{(v) => v}</Use>
-
       {/* The onResultsChange callback can be used to interact outside of JSX */}
       <UseTimes hook={useExampleHook} n={10} onResultsChange={setHookResults} />
-
       {/* When allows JSX to be conditionally rendered without escaping from JSX */}
       <When cond={() => 1 === 1}>
         <p>should render</p>
       </When>
-
       <When cond={() => 1 === 2}>
         <p>should not render</p>
       </When>
-
       {/* UseWhen simply composes Use and When */}
       <UseWhen
         cond={() => 1 === 2}
         hook={useLogEffect}
         hookArgs="should not log"
       />
-
       <UseWhen cond={() => 1 === 1} hook={useLogEffect} hookArgs="should log" />
-
-      {/* Upon allows some JSX to be rendered only when a callback is called. And only for one render cycle! */}
-      <Upon then={<Use hook={useLogEffect} hookArgs="button clicked!" />}>
+      {/* Upon allows some JSX to be rendered only when a callback is called. singleFire means only for one render cycle! */}
+      <Upon then={<Use hook={useLogEffect} hookArgs="button clicked!" singleFire />}>
         {(cb) => <button onClick={cb}>click me and view logs</button>}
       </Upon>
-
       {/* UseLet allows calling multiple hooks within JSX and having the results passed to children. */}
       <UseLet
         map={{
@@ -80,6 +71,28 @@ const App = () => {
           </>
         )}
       </UseLet>
+      {/* A more complicated example showing things working together. */}
+      <Upon
+        then={
+          <UseLet
+            map={{
+              age: [useExampleHook, 32],
+              name: [useExampleHook, "Someone"],
+            }}
+          >
+            {({ name, age }) => (
+              <>
+                <p>Name: {name}</p>
+                <p>Age: {age}</p>
+              </>
+            )}
+          </UseLet>
+        }
+      >
+        {(cb) => (
+          <button onClick={cb}>Click me to reveal personal details</button>
+        )}
+      </Upon>
     </>
   );
 };

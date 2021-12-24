@@ -26,6 +26,8 @@ const UseLet = ({ map, children, onResultsChange }) => {
     return <Use key={key} hook={hook} hookArgs={args} onResult={(newResult) => handleResult(key, newResult)} />;
   });
 
+  console.log('giong to call children with ', newestResults);
+
   return (
     <>
       {useEls}
