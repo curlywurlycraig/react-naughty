@@ -51,8 +51,12 @@ const App = () => {
         hookArgs="should not log"
       />
       <UseWhen cond={() => 1 === 1} hook={useLogEffect} hookArgs="should log" />
-      {/* Upon allows some JSX to be rendered only when a callback is called. singleFire means only for one render cycle! */}
-      <Upon then={<Use hook={useLogEffect} hookArgs="button clicked!" singleFire />}>
+      {/* Upon allows some hook to be called only when a callback is called. */}
+      <Upon
+        hook={function useHook() {
+          useLogEffect("button clicked!");
+        }}
+      >
         {(cb) => <button onClick={cb}>click me and view logs</button>}
       </Upon>
       {/* UseLet allows calling multiple hooks within JSX and having the results passed to children. */}
@@ -71,26 +75,24 @@ const App = () => {
           </>
         )}
       </UseLet>
-      {/* A more complicated example showing things working together. */}
+
       <Upon
-        then={
-          <UseLet
-            map={{
-              age: [useExampleHook, 32],
-              name: [useExampleHook, "Someone"],
-            }}
-          >
-            {({ name, age }) => (
-              <>
-                <p>Name: {name}</p>
-                <p>Age: {age}</p>
-              </>
-            )}
-          </UseLet>
-        }
+        hook={function useHook() {
+          // Do some network call or something
+          const [response, setResponse] = useState(null);
+          useEffect(() =>
+            setTimeout(() => setResponse("pretend response"), 1000)
+          );
+          return response;
+        }}
       >
-        {(cb) => (
-          <button onClick={cb}>Click me to reveal personal details</button>
+        {(cb, response) => (
+          <>
+            <button onClick={cb}>Make pretend network response</button>
+            <When cond={() => response}>
+              <p>got response: {response}</p>
+            </When>
+          </>
         )}
       </Upon>
     </>

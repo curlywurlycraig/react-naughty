@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import When from "./when";
+import Use from "./use";
 
-const Upon = ({ then, children, singleFire }) => {
-  const [willDo, setWillDo] = useState(false);
+const Upon = ({ hook, children }) => {
+  const [args, setArgs] = useState(null);
+  const [results, setResults] = useState(null);
+  const [callIndex, setCallIndex] = useState(0);
 
-  const cb = () => {
-    setWillDo(true);
+  const cb = (args) => {
+    setCallIndex(callIndex + 1);
+    setArgs(args);
   };
-
-  useEffect(() => {
-    if (willDo && singleFire) {
-      setWillDo(false);
-    }
-  }, [willDo]);
 
   return (
     <>
-      <When cond={() => willDo}>{then}</When>
-      {children(cb)}
+      <When cond={() => callIndex > 0}>
+        <Use key={callIndex} hook={hook} args={args} onResult={setResults} />
+      </When>
+      {children(cb, results)}
     </>
   );
 };
