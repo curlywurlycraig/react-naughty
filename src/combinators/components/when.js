@@ -1,7 +1,7 @@
 import React from "react";
 
 const When = ({ cond, children }) => {
-    if (cond()) {
+    if (cond) {
         return children;
     }
 

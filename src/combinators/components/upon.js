@@ -14,7 +14,7 @@ const Upon = ({ hook, children }) => {
 
   return (
     <>
-      <When cond={() => callIndex > 0}>
+      <When cond={callIndex > 0}>
         <Use key={callIndex} hook={hook} args={args} onResult={setResults} />
       </When>
       {children(cb, results)}

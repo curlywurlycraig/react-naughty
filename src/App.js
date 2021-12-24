@@ -3,7 +3,6 @@ import Times from "./combinators/components/times";
 import UseTimes from "./combinators/components/useTimes";
 import Use from "./combinators/components/use";
 import When from "./combinators/components/when";
-import UseWhen from "./combinators/components/useWhen";
 import Upon from "./combinators/components/upon";
 import UseLet from "./combinators/components/useLet";
 import UseAll from "./combinators/components/useAll";
@@ -39,19 +38,18 @@ const App = () => {
       {/* The onResultsChange callback can be used to interact outside of JSX */}
       <UseTimes hook={useExampleHook} n={10} onResultsChange={setHookResults} />
       {/* When allows JSX to be conditionally rendered without escaping from JSX */}
-      <When cond={() => 1 === 1}>
+      <When cond={1 === 1}>
         <p>should render</p>
       </When>
-      <When cond={() => 1 === 2}>
+      <When cond={1 === 2}>
         <p>should not render</p>
       </When>
-      {/* UseWhen simply composes Use and When */}
-      <UseWhen
-        cond={() => 1 === 2}
+      <Use
+        when={1 === 2}
         hook={useLogEffect}
         hookArgs="should not log"
       />
-      <UseWhen cond={() => 1 === 1} hook={useLogEffect} hookArgs="should log" />
+      <Use when={1 === 1} hook={useLogEffect} hookArgs="should log" />
       {/* Upon allows some hook to be called only when a callback is called. */}
       <Upon
         hook={function useHook() {
@@ -90,7 +88,7 @@ const App = () => {
         {(cb, response) => (
           <>
             <button onClick={cb}>Make pretend network response</button>
-            <When cond={() => response}>
+            <When cond={response}>
               <p>got response: {response}</p>
             </When>
           </>

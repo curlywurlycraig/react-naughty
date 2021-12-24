@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import When from "./when";
 
 const HookWrapper = ({ hook, hookArgs, onResult }) => {
   const useHook = hook; // To avoid warnings
@@ -11,7 +12,7 @@ const HookWrapper = ({ hook, hookArgs, onResult }) => {
   return null;
 };
 
-const Use = ({ hook, hookArgs, children, onResult }) => {
+const Use = ({ hook, hookArgs, children, onResult, when = true }) => {
   const [results, setResults] = useState(null);
 
   const updateHookResults = (newResults) => {
@@ -22,14 +23,14 @@ const Use = ({ hook, hookArgs, children, onResult }) => {
   };
 
   return (
-    <>
+    <When cond={when}>
       <HookWrapper
         hook={hook}
         hookArgs={hookArgs}
         onResult={updateHookResults}
       />
       {children ? children(results) : null}
-    </>
+    </When>
   );
 };
 
