@@ -69,6 +69,14 @@ return <UseTimes n={10} hook={useMyHook}>
 </UseTimes>
 ```
 
+## Calling the same hook many times with different arguments, using `<UseAll />`
+
+TODO
+
+## Calling multiple hooks with different arguments, binding the results in an object, using `<UseLet />`
+
+TODO
+
 # How?
 
 TODO: Write about how hook rules can be bent by having their wrapper component be conditionally rendered. The hook is always coupled with the component.
