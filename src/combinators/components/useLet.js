@@ -20,6 +20,7 @@ const UseLet = ({ map, children, onResultsChange }) => {
 
   const hasAll = Object.keys(newestResults).length === Object.keys(map).length;
 
+  console.log('trying to get entries for ', map)
   const useEls = Object.entries(map).map(([key, val]) => {
     const hook = typeof val === "function" ? val : val[0];
     const args = typeof val === "function" ? null : val.slice(1);

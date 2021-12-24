@@ -7,6 +7,7 @@ import UseWhen from "./combinators/components/useWhen";
 import Upon from "./combinators/components/upon";
 import UseLet from "./combinators/components/useLet";
 import "./App.css";
+import UseAll from "./combinators/components/useAll";
 
 const useExampleHook = (val) => {
   return val || 1;
@@ -95,6 +96,29 @@ const App = () => {
           </>
         )}
       </Upon>
+
+      {/* UseAll allows calling the same hook with multiple different args */}
+      <UseAll
+        hook={function useUser(userId) {
+          // Let's say you had some hook that you couldn't modify. It only allows you to pass in one value,
+          // but you need the result for many values.
+          const users = {
+            123: "Craig",
+            45: "Bob",
+          };
+
+          return users[userId];
+        }}
+        argList={[123, 45]}
+      >
+        {([craig, bob]) => (
+          <>
+            <p>got these users</p>
+            <p>{craig}</p>
+            <p>{bob}</p>
+          </>
+        )}
+      </UseAll>
     </>
   );
 };
